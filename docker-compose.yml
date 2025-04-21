@@ -1,0 +1,173 @@
+﻿name: autopark
+
+services:
+  api.gateway.host:
+#    image: ${Docker_registry}/api.gateway.host
+    image: api.gateway.host
+    build:
+      context: .
+      dockerfile: server/src/hosts/Autopark.ApiGateway.Host/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5000:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_HTTP_PORTS=80
+
+  public.api.host:
+#    image: ${Docker_registry}/public.api.host
+    image: public.api.host
+    build:
+      context: .
+      dockerfile: server/src/hosts/Autopark.PublicApi.Host/Dockerfile
+    restart: unless-stopped
+    ports:
+      - "5100:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+      - ASPNETCORE_HTTP_PORTS=80
+      - IdentityConfiguration__AdminConfiguration__UserName=${identity_username}
+      - IdentityConfiguration__AdminConfiguration__Password=${identity_password}
+    depends_on:
+      public.api.db:
+        condition: service_started
+      zookeeper:
+        condition: service_started
+
+  public.api.db:
+    image: postgres:16
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    volumes:
+      - .containers/public.api.db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=public.api.db
+      - POSTGRES_USER=${public_api_db_user}
+      - POSTGRES_PASSWORD=${public_api_db_password}
+  
+#  chat.host:
+##    image: ${Docker_registry}/chat.host
+#    image: chat.host
+#    build:
+#      context: .
+#      dockerfile: server/src/hosts/Autopark.Chat.Host/Dockerfile
+#    restart: unless-stopped
+#    ports:
+#      - "5200:80"
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+#      - ASPNETCORE_HTTP_PORTS=80
+#    depends_on:
+#      chat.db:
+#        condition: service_started
+#      zookeeper:
+#        condition: service_started
+
+  chat.db:
+    image: postgres:16
+    restart: unless-stopped
+    ports:
+      - "5433:5432"
+    volumes:
+      - .containers/chat.db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=chat.db
+      - POSTGRES_USER=${chat_db_user}
+      - POSTGRES_PASSWORD=${chat_db_password}
+  
+#  report.host:
+##    image: ${Docker_registry}/report.host
+#    image: report.host
+#    build:
+#      context: .
+#      dockerfile: server/src/hosts/Autopark.Report.Host/Dockerfile
+#    restart: unless-stopped
+#    ports:
+#      - "5300:80"
+#    environment:
+#      - ASPNETCORE_ENVIRONMENT=${ASPNETCORE_ENVIRONMENT}
+#      - ASPNETCORE_HTTP_PORTS=80
+#    depends_on:
+#      report.db:
+#        condition: service_started
+#      zookeeper:
+#        condition: service_started
+
+  report.db:
+    image: postgres:16
+    restart: unless-stopped
+    ports:
+      - "5434:5432"
+    volumes:
+      - .containers/report.db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=report.db
+      - POSTGRES_USER=${report_db_user}
+      - POSTGRES_PASSWORD=${report_db_password}
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper
+    restart: unless-stopped
+    ports:
+      - "2181:2181"
+    volumes:
+      - .containers/zookeeper/data:/var/lib/zookeeper/data
+      - .containers/zookeeper/log:/var/lib/zookeeper/log
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+
+  kafka:
+    image: confluentinc/cp-kafka
+    restart: unless-stopped
+    ports:
+      - "9092:9092"
+      - "29092:29092"
+    volumes:
+      - .containers/kafka_broker/data:/var/lib/kafka/data
+    environment:
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_HOST://localhost:29092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    depends_on:
+      zookeeper:
+        condition: service_started
+
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    restart: unless-stopped
+    ports:
+      - "9090:8080"
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: PLAINTEXT://kafka:9092
+    depends_on:
+      kafka:
+        condition: service_started
+
+  kafka-init:
+    image: confluentinc/cp-kafka
+    command: [ "/bin/bash", "-c", "sleep 5 && /init-kafka.sh" ]
+    depends_on:
+      kafka:
+        condition: service_started
+    volumes:
+      - ./init-kafka.sh:/init-kafka.sh
+    init: true
+    
+  keycloak:
+    image: quay.io/keycloak/keycloak:latest
+    command: start-dev --import-realm -- verbose
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    environment:
+      - KC_HEALTH_ENABLED=true
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=admin
+    volumes:
+      - .containers/keycloak/data:/opt/keycloak/data
+      - ./import_realm:/opt/keycloak/data/import

@@ -1,0 +1,22 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <Reference Include="Microsoft.Extensions.Hosting.Abstractions"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Autopark.Common.Bl\Autopark.Common.Bl.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Autofac.Extensions.DependencyInjection" />
+      <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" />
+    </ItemGroup>
+
+</Project>

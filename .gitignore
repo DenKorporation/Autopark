@@ -1,0 +1,10 @@
+bin/
+obj/
+/packages/
+.idea/
+
+# Docker Volume
+.containers/
+
+# Environment variables
+/.env

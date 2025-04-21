@@ -1,0 +1,69 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/chat-hub",
+      "DownstreamScheme": "ws",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chat.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/chat/chat-hub",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE",
+        "OPTIONS"
+      ],
+      "SwaggerKey": "chat"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/users/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chat.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/chat/api/{version}/users/{everything}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "SwaggerKey": "chat"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/chats/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chat.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/chat/api/{version}/chats/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST"
+      ],
+      "SwaggerKey": "chat"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/messages/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "chat.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/chat/api/{version}/messages/{everything}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "SwaggerKey": "chat"
+    }
+  ]
+}

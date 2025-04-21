@@ -1,0 +1,24 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper"/>
+        <PackageReference Include="Microsoft.EntityFrameworkCore"/>
+        <PackageReference Include="FluentResults"/>
+        <PackageReference Include="FluentValidation"/>
+        <PackageReference Include="FluentValidation.AspNetCore"/>
+        <PackageReference Include="MediatR"/>
+        <PackageReference Include="Schick.Keycloak.RestApiClient" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Autopark.Common\Autopark.Common.csproj"/>
+        <ProjectReference Include="..\Autopark.Dal.Core\Autopark.Dal.Core.csproj" />
+    </ItemGroup>
+
+</Project>

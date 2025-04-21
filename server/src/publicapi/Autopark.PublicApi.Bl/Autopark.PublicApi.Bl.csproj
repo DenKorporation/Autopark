@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="AutoMapper"/>
+        <PackageReference Include="FluentResults"/>
+        <PackageReference Include="FluentValidation"/>
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions"/>
+        <PackageReference Include="MediatR"/>
+        <PackageReference Include="Microsoft.Extensions.Hosting"/>
+        <PackageReference Include="MassTransit.Extensions.DependencyInjection"/>
+        <PackageReference Include="MassTransit.Kafka"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\common\Autopark.Common.Bl\Autopark.Common.Bl.csproj"/>
+        <ProjectReference Include="..\..\common\Autopark.Common.Web\Autopark.Common.Web.csproj"/>
+        <ProjectReference Include="..\Autopark.PublicApi.Dal\Autopark.PublicApi.Dal.csproj"/>
+    </ItemGroup>
+
+</Project>

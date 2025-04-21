@@ -1,0 +1,122 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/.well-known/openid-configuration/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/.well-known/openid-configuration/{everything}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "SwaggerKey": "auth"
+    },
+    {
+      "DownstreamPathTemplate": "/connect/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/connect/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST"
+      ],
+      "SwaggerKey": "auth"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/contracts/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/api/{version}/contracts/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "SwaggerKey": "auth"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/users/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/api/{version}/users/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "SwaggerKey": "auth"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/passports/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/api/{version}/passports/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "SwaggerKey": "auth"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/workbooks/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/api/{version}/workbooks/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "SwaggerKey": "auth"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/roles",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "auth.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/auth/api/{version}/roles",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "SwaggerKey": "auth"
+    }
+  ]
+}

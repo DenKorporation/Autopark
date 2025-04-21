@@ -1,0 +1,44 @@
+{
+  "SwaggerEndPoints": [
+    {
+      "Key": "auth",
+      "Config": [
+        {
+          "Name": "AutoPark.Authorization.API",
+          "Version": "v1",
+          "Url": "http://auth.host:80/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "public.api",
+      "Config": [
+        {
+          "Name": "AutoPark.Public.API",
+          "Version": "v1",
+          "Url": "http://public.api.host:80/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "chat",
+      "Config": [
+        {
+          "Name": "AutoPark.Chat.API",
+          "Version": "v1",
+          "Url": "http://chat.host:80/swagger/v1/swagger.json"
+        }
+      ]
+    },
+    {
+      "Key": "report",
+      "Config": [
+        {
+          "Name": "AutoPark.Report.API",
+          "Version": "v1",
+          "Url": "http://report.host:80/swagger/v1/swagger.json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,31 @@
+### Порты (localhost/docker):
+
+- ApiGateway:
+    * Host
+        + 5000
+- PublicApi:
+    * Host
+        + 5100/None
+    * DB
+        + 5432
+- ChatService:
+    * Host
+        + 5200/None
+    * DB
+        + 5433
+- ReportService:
+    * Host
+        + 5300/None
+    * DB
+        + 5434
+- Kafka:
+    * Zookeper
+        + 2181
+    * Kafka
+        + 29092
+        + 9092
+    * UI
+        + 9090
+- Keycloak:
+    * Main
+        + 8080

@@ -1,0 +1,109 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{version}/users/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "public.api.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/public/api/{version}/users/{everything}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "SwaggerKey": "public.api"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/insurances/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "public.api.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/public/api/{version}/insurances/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "SwaggerKey": "public.api"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/maintenanceRecords/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "public.api.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/public/api/{version}/maintenanceRecords/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "SwaggerKey": "public.api"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/permissions/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "public.api.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/public/api/{version}/permissions/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "SwaggerKey": "public.api"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/technicalPassports/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "public.api.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/public/api/{version}/technicalPassports/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "SwaggerKey": "public.api"
+    },
+    {
+      "DownstreamPathTemplate": "/api/{version}/vehicles/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "public.api.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/public/api/{version}/vehicles/{everything}",
+      "UpstreamHttpMethod": [
+        "GET",
+        "POST",
+        "PUT",
+        "DELETE"
+      ],
+      "SwaggerKey": "public.api"
+    }
+  ]
+}

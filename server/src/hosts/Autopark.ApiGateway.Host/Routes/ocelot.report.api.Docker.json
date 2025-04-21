@@ -1,0 +1,19 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/{version}/users/{everything}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "report.host",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/report/api/{version}/users/{everything}",
+      "UpstreamHttpMethod": [
+        "GET"
+      ],
+      "SwaggerKey": "report"
+    }
+  ]
+}
